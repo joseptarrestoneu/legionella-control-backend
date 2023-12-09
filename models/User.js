@@ -9,7 +9,10 @@ const userSchema = new Schema({
     userEmail: String,
     userUser: String,
     userPassword: String,
-    userCompany: String,
+    userCompanyId: { 
+        type: Schema.Types.ObjectId, 
+        ref: 'Company' 
+    },
 }, { timestamps: true })
 
 const User = model('User', userSchema)
