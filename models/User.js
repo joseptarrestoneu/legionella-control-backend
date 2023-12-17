@@ -13,6 +13,7 @@ const userSchema = new Schema({
         type: Schema.Types.ObjectId, 
         ref: 'Company' 
     },
+    userActive: Boolean,
 }, { timestamps: true })
 
 const User = model('User', userSchema)

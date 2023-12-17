@@ -8,6 +8,7 @@ const upkeepTypeSchema = new Schema({
         type: Schema.Types.ObjectId, 
         ref: 'Company' 
     },
+    upkeepTypeActive: Boolean,
 }, { timestamps: true })
 
 const UpkeepType = model('UpkeepType', upkeepTypeSchema)

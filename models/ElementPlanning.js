@@ -21,6 +21,7 @@ const elementPlanningSchema = new Schema({
         ref: 'User' 
     },
     elementPlanningValidation: Boolean,
+    elementPlanningActive: Boolean,
 }, { timestamps: true })
 
 const ElementPlanning = model('ElementPlanning', elementPlanningSchema)

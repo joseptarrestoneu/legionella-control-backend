@@ -14,6 +14,12 @@ const elementSchema = new Schema({
         type: Schema.Types.ObjectId, 
         ref: 'Area' 
     },
+    elementUpkeepId: [
+        {
+            type: Schema.Types.ObjectId,
+            ref: 'Upkeep'
+        },  
+    ],
     elementActive: Boolean,
 }, { timestamps: true })
 
