@@ -5,7 +5,8 @@ const express = require('express')
 const morgan = require('morgan')
 const cors = require('cors')
 const app = express()
-const Company = require('./models/Company')
+// const routes = require('./routes/index')
+const Companies = require('./models/Companies')
 const Area = require('./models/Area')
 const Element = require('./models/Element')
 const Planning = require('./models/ElementPlanning')
@@ -27,22 +28,20 @@ app.use(morgan(function (tokens, req, res) {
     ].join(' ')   
 }))
 
-app.get('/', (request, response) => {
-    response.send('<h1>Hello World!</h1>')
-})
+// app.use(routes)
 
 // Company
-app.get('/api/companys', (request, response) => {
-    Company.find({}).then(companys => {
-        response.json(companys)
+app.get('/api/companies', (request, response) => {
+    Companies.find({}).then(Companies => {
+        response.json(Companies)
     })
 })
 
-app.get('/api/companys/:id', (request, response, next) => {
+app.get('/api/companies/:id', (request, response, next) => {
     const { id } = request.params;
-    Company.findById(id).then(company => {
-        if (company) {
-            return response.json(company)
+    Companies.findById(id).then(Companies => {
+        if (Companies) {
+            return response.json(Companies)
         } else {
             response.status(404).end()
         }
@@ -51,17 +50,17 @@ app.get('/api/companys/:id', (request, response, next) => {
     })
 })
 
-app.delete('/api/companys/:id', (request, response, next) => {
+app.delete('/api/companies/:id', (request, response, next) => {
     const { id } = request.params;
 
-    Company.findByIdAndDelete(id).then(result => {
+    Companies.findByIdAndDelete(id).then(result => {
         response.status(204).end()
     }).catch(err => {
         next(err)
     })
 })
 
-app.post('/api/companys', (request, response) => {
+app.post('/api/companies', (request, response) => {
     const body = request.body
 
     if (!body.companyCIF) {
@@ -70,7 +69,7 @@ app.post('/api/companys', (request, response) => {
         })
     }
 
-    const newCompany = new Company({
+    const newCompany = new Companies({
         companyName: body.companyName,
         companyCIF: body.companyCIF,
         companyActive: true,
@@ -81,7 +80,7 @@ app.post('/api/companys', (request, response) => {
     })
 })
 
-app.put('/api/companys/:id', (request, response, next) => {
+app.put('/api/companies/:id', (request, response, next) => {
     const { id } = request.params;
     const body = request.body;
 
@@ -91,7 +90,7 @@ app.put('/api/companys/:id', (request, response, next) => {
         companyActive: body.companyActive,
     }
 
-    Company.findByIdAndUpdate(id, newCompanyInfo, {new: true})
+    Companies.findByIdAndUpdate(id, newCompanyInfo, {new: true})
         .then(result => {
             response.json(result)
         })
@@ -99,7 +98,8 @@ app.put('/api/companys/:id', (request, response, next) => {
 
 // Area
 app.get('/api/arees', (request, response) => {
-    Area.find({}).then(area => {
+    Area.find({}).populate("areaCompanyId")
+    .then(area => {
         response.json(area)
     })
 })
@@ -165,7 +165,8 @@ app.put('/api/arees/:id', (request, response, next) => {
 
 // Element
 app.get('/api/elements', (request, response) => {
-    Element.find({}).then(element => {
+    Element.find({}).populate("elementCompanyId").populate("elementAreaId")
+    .then(element => {
         response.json(element)
     })
 })
@@ -229,7 +230,6 @@ app.put('/api/elements/:id', (request, response, next) => {
         elementUbication: body.elementUbication,
         elementCompanyId: body.elementCompanyId,
         elementAreaId: body.elementAreaId,
-        elementUpkeepId: body.elementUpkeepId,
         elementActive: body.elementActive,
     }
 
@@ -280,6 +280,7 @@ app.post('/api/planning', (request, response) => {
 
     const newElementPlanning = new Planning({
         elementId: body.elementId,
+        elementUpkeepId: body.elementUpkeepId,
         elementPlanningDate: body.elementPlanningDate,
         elementDoDate: body.elementDoDate,
         elementCompanyId: body.elementCompanyId,
@@ -300,6 +301,7 @@ app.put('/api/planning/:id', (request, response, next) => {
 
     const newPlanningInfo = {
         elementId: body.elementId,
+        elementUpkeepId: body.elementUpkeepId,
         elementPlanningDate: body.elementPlanningDate,
         elementDoDate: body.elementDoDate,
         elementCompanyId: body.elementCompanyId,
@@ -317,7 +319,8 @@ app.put('/api/planning/:id', (request, response, next) => {
 
 // Upkeep (manteniments)
 app.get('/api/upkeeps', (request, response) => {
-    Upkeep.find({}).then(upkeep => {
+    Upkeep.find({}).populate("upkeepTypeId").populate("upkeepCompanyId")
+    .then(upkeep => {
         response.json(upkeep)
     })
 })
@@ -455,7 +458,8 @@ app.put('/api/upkeepstypes/:id', (request, response, next) => {
 
 // Usuaris
 app.get('/api/users', (request, response) => {
-    User.find({}).then(users => {
+    User.find({}).populate("userCompanyId")
+    .then(users => {
         response.json(users)
     })
 })

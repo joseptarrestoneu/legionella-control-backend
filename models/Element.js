@@ -8,18 +8,12 @@ const elementSchema = new Schema({
     elementUbication: String,
     elementCompanyId: {
         type: Schema.Types.ObjectId, 
-        ref: 'Company' 
+        ref: 'Companies' 
     },
     elementAreaId: {
         type: Schema.Types.ObjectId, 
         ref: 'Area' 
     },
-    elementUpkeepId: [
-        {
-            type: Schema.Types.ObjectId,
-            ref: 'Upkeep'
-        },  
-    ],
     elementActive: Boolean,
 }, { timestamps: true })
 

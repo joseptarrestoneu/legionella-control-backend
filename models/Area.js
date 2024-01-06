@@ -5,7 +5,7 @@ const areaSchema = new Schema({
     areaName: String,
     areaCompanyId: {
         type: Schema.Types.ObjectId, 
-        ref: 'Company' 
+        ref: 'Companies' 
     },
     areaActive: Boolean,
 }, { timestamps: true })

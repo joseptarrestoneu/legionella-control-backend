@@ -6,11 +6,17 @@ const elementPlanningSchema = new Schema({
         type: Schema.Types.ObjectId, 
         ref: 'Element' 
     },
+    elementUpkeepId: [
+        {
+            type: Schema.Types.ObjectId,
+            ref: 'Upkeep'
+        },  
+    ],
     elementPlanningDate: Date,
     elementDoDate: Date,
     elementCompanyId: {
         type: Schema.Types.ObjectId, 
-        ref: 'Company' 
+        ref: 'Companies' 
     },
     elementUserPlanningId: {
         type: Schema.Types.ObjectId, 

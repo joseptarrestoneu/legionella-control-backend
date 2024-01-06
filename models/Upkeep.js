@@ -10,7 +10,7 @@ const upkeepSchema = new Schema({
     },
     upkeepCompanyId: {
         type: Schema.Types.ObjectId, 
-        ref: 'Company' 
+        ref: 'Companies' 
     },
     upkeepActive: Boolean,
 }, { timestamps: true })

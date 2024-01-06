@@ -6,7 +6,7 @@ const upkeepTypeSchema = new Schema({
     upkeepTypeUnits: String,
     upkeepTypeCompanyId: {
         type: Schema.Types.ObjectId, 
-        ref: 'Company' 
+        ref: 'Companies' 
     },
     upkeepTypeActive: Boolean,
 }, { timestamps: true })

@@ -11,7 +11,7 @@ const userSchema = new Schema({
     userPassword: String,
     userCompanyId: { 
         type: Schema.Types.ObjectId, 
-        ref: 'Company' 
+        ref: 'Companies' 
     },
     userActive: Boolean,
 }, { timestamps: true })
