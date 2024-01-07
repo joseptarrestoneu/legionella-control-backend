@@ -5,6 +5,7 @@ const companiesSchema = new Schema({
     companyName: String,
     companyCIF: String,
     companyActive: Boolean,
+    companyDeleted: Boolean,
 }, { timestamps: true })
 
 const Companies = model('Companies', companiesSchema)

@@ -15,6 +15,7 @@ const elementSchema = new Schema({
         ref: 'Area' 
     },
     elementActive: Boolean,
+    elementDeleted: Boolean,
 }, { timestamps: true })
 
 const Element = model('Element', elementSchema)

@@ -9,6 +9,7 @@ const upkeepTypeSchema = new Schema({
         ref: 'Companies' 
     },
     upkeepTypeActive: Boolean,
+    upkeepTypeDeleted: Boolean,
 }, { timestamps: true })
 
 const UpkeepType = model('UpkeepType', upkeepTypeSchema)

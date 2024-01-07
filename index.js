@@ -73,6 +73,7 @@ app.post('/api/companies', (request, response) => {
         companyName: body.companyName,
         companyCIF: body.companyCIF,
         companyActive: true,
+        companyDeleted: false,
     })
 
     newCompany.save().then(savedCompany => {
@@ -88,6 +89,7 @@ app.put('/api/companies/:id', (request, response, next) => {
         companyName: body.companyName,
         companyCIF: body.companyCIF,
         companyActive: body.companyActive,
+        companyDeleted: body.companyDeleted,
     }
 
     Companies.findByIdAndUpdate(id, newCompanyInfo, {new: true})
@@ -140,6 +142,7 @@ app.post('/api/arees', (request, response) => {
         areaName: body.areaName,
         areaCompanyId: body.areaCompanyId,
         areaActive: true,
+        areaDeleted: false,
     })
 
     newArea.save().then(savedArea => {
@@ -155,6 +158,7 @@ app.put('/api/arees/:id', (request, response, next) => {
         areaName: body.areaName,
         areaCompanyId: body.areaCompanyId,
         areaActive: body.areaActive,
+        areaDeleted: body.areaDeleted,
     }
 
     Area.findByIdAndUpdate(id, newAreaInfo, {new: true})
@@ -212,6 +216,7 @@ app.post('/api/elements', (request, response) => {
         elementAreaId: body.elementAreaId,
         elementUpkeepId: body.elementUpkeepId,
         elementActive: true,
+        elementDeleted: false,
     })
 
     newElement.save().then(savedElement => {
@@ -231,6 +236,7 @@ app.put('/api/elements/:id', (request, response, next) => {
         elementCompanyId: body.elementCompanyId,
         elementAreaId: body.elementAreaId,
         elementActive: body.elementActive,
+        elementDeleted: body.elementDeleted,
     }
 
     Element.findByIdAndUpdate(id, newElementInfo, {new: true})
@@ -363,6 +369,7 @@ app.post('/api/upkeeps', (request, response) => {
         upkeepTypeId: body.upkeepTypeId,
         upkeepCompanyId: body.upkeepCompanyId,
         upkeepActive: true,
+        upkeepDeleted: false,
     })
 
     newUpkeep.save().then(savedUpkeep => {
@@ -380,6 +387,7 @@ app.put('/api/upkeeps/:id', (request, response, next) => {
         upkeepTypeId: body.upkeepTypeId,
         upkeepCompanyId: body.upkeepCompanyId,
         upkeepActive: body.upkeepActive,
+        upkeepDeleted: body.upkeepDeleted,
     }
 
     Upkeep.findByIdAndUpdate(id, newUpkeepInfo, {new: true})
@@ -432,6 +440,7 @@ app.post('/api/upkeepstypes', (request, response) => {
         upkeepTypeUnits: body.upkeepTypeUnits,
         upkeepTypeCompanyId: body.upkeepTypeCompanyId,
         upkeepTypeActive: true,
+        upkeepTypeDeleted: false,
     })
 
     newUpkeepType.save().then(savedUpkeepType => {
@@ -448,6 +457,7 @@ app.put('/api/upkeepstypes/:id', (request, response, next) => {
         upkeepTypeUnits: body.upkeepTypeUnits,
         upkeepTypeCompanyId: body.upkeepTypeCompanyId,
         upkeepTypeActive: body.upkeepTypeActive,
+        upkeepTypeDeleted: body.upkeepTypeDeleted,
     }
 
     Upkeeptype.findByIdAndUpdate(id, newUpkeepTypesInfo, {new: true})
@@ -506,6 +516,7 @@ app.post('/api/users', (request, response) => {
         userPassword: body.userPassword,
         userCompanyId: body.userCompanyId,
         userActive: true,
+        userDeleted: false,
     })
 
     newUser.save().then(savedUser => {
@@ -527,6 +538,7 @@ app.put('/api/users/:id', (request, response, next) => {
         userPassword: body.userPassword,
         userCompanyId: body.userCompanyId,
         userActive: body.userActive,
+        userDeleted: body.userDeleted,
     }
 
     User.findByIdAndUpdate(id, newUserInfo, {new: true})

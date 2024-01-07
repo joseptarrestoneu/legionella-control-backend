@@ -14,6 +14,7 @@ const userSchema = new Schema({
         ref: 'Companies' 
     },
     userActive: Boolean,
+    userDeleted: Boolean,
 }, { timestamps: true })
 
 const User = model('User', userSchema)

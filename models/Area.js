@@ -8,6 +8,7 @@ const areaSchema = new Schema({
         ref: 'Companies' 
     },
     areaActive: Boolean,
+    areaDeleted: Boolean,
 }, { timestamps: true })
 
 const Area = model('Area', areaSchema)
